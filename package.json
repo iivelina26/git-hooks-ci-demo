@@ -1,0 +1,41 @@
+{
+  "name": "docs-image-optimizer",
+  "version": "1.0.0",
+  "description": "Image optimization for documentation",
+  "scripts": {
+    "clean-docs": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"if (Test-Path 'docfx/_site') { Remove-Item 'docfx/_site' -Recurse -Force }\"",
+    "optimize-images": "node scripts/optimize-images.js",
+    "install-deps": "npm install",
+    "hooks:install": "git config core.hooksPath project-hooks",
+    "install-docfx": "dotnet tool install -g docfx",
+    "check-images": "node scripts/check-images.js",
+    "format:check": "prettier --check \"package.json\" \".github/**/*.{yml,yaml}\" \"scripts/**/*.js\"",
+    "format": "prettier --write \"package.json\" \".github/**/*.{yml,yaml}\" \"scripts/**/*.js\"",
+    "test": "npm run check-images",
+    "build-docs": "npm run clean-docs && cd docfx && docfx build",
+    "build-docs-with-dredging": "npm run clean-docs && cd docfx && docfx build docfx.with-dredging.json",
+    "build-pdf": "cd docfx && docfx pdf",
+    "generate-customer-pdf": "node scripts/generate-customer-pdf.js",
+    "generate-installer-user-guide-pdf": "node scripts/generate-installer-user-guide-pdf.js",
+    "serve-docs": "npm run build-docs && cd docfx && docfx serve _site --port 1234",
+    "serve-docs-with-dredging": "npm run build-docs-with-dredging && cd docfx && docfx serve _site --port 1234",
+    "replace-ksim-version": "node scripts/replace-version.js"
+  },
+  "devDependencies": {
+    "imagemin": "^8.0.1",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-svgo": "^10.0.1",
+    "glob": "^10.3.10",
+    "fs-extra": "^11.2.0",
+    "prettier": "^3.6.2",
+    "puppeteer": "^24.0.0"
+  },
+  "keywords": [
+    "documentation",
+    "image-optimization"
+  ],
+  "author": "",
+  "license": "MIT"
+}

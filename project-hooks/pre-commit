@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Running formatting checks..."
+npm run format:check
