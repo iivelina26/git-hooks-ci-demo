@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - main
-      - master
 
 permissions:
   contents: read
@@ -23,22 +22,11 @@ jobs:
           node-version: 18
           cache: npm
 
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 9.0.x
-
-      - name: Restore .NET tools
-        run: dotnet tool restore
-
       - name: Install npm packages
         run: npm ci
 
       - name: Check formatting
         run: npm run format:check
 
-      - name: Run repository tests
+      - name: Run tests
         run: npm test
-
-      - name: Build DocFX site
-        run: npm run build-docs
