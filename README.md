@@ -5,3 +5,5 @@ Demo repository showing:
 - pre-commit formatting checks
 - pre-push test enforcement
 - GitHub Actions CI on pull requests
+
+PR test change
